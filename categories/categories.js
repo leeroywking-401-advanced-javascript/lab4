@@ -7,7 +7,8 @@ class Categories extends DataModel {
     super();
     this.schema = {
       id: { required: true },
-      name: { required: true },
+      name: { required: true, type:'string' },
+      zoo: {required: false, type:'boolean'},
     };
   }
 }

@@ -57,19 +57,25 @@ describe('Categories Model', () => {
 
   it('can update a category', () => {
     let obj = { name: 'Test Category', zoo:true };
-    console.log(obj)
      categories.create(obj)
       .then(record => {
-        console.log(record)
         categories.update(record.id, { name: 'New Test Category', id: 55 })
           .then(category => {
             categories.get(55)
               .then(zz => {
-                console.log(zz)
                 expect(zz.name).toEqual('New Test Category')
               })
               .catch(err => console.err)
           })
       })
+  })
+
+  it('rejects bad type checks', () => {
+    let obj = { name: 555};
+    categories.create(obj)
+      .then(record => {
+        expect(record.id).toBeUndefined()
+      })
+      .catch(err => console.error)
   })
 })

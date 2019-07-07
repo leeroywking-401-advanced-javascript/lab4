@@ -16,8 +16,11 @@ class Model {
   create(entry) {
     entry.id = uuid();
     let record = this.sanitize(entry);
-    if (record.id) { this.database.push(record); }
+    if (record) {
+      if (record.id) { this.database.push(record); }
+    }
     return Promise.resolve(record);
+
   }
 
   update(id, entry) {
@@ -39,13 +42,20 @@ class Model {
     Object.keys(this.schema).forEach(field => {
       if (this.schema[field].required) {
         if (entry[field]) {
-          record[field] = entry[field];
+          if (!this.schema[field].type || (this.schema[field].type === typeof entry[field])) {
+            record[field] = entry[field];
+          }
+          else {
+            valid = false
+          }
         } else {
           valid = false;
         }
       }
       else {
-        record[field] = entry[field];
+        if (this.schema[field].type === typeof entry[field]) {
+          record[field] = entry[field];
+        }
       }
     });
     return valid ? record : undefined;
