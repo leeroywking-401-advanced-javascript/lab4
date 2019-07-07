@@ -1,0 +1,26 @@
+
+  //   sanitize(entry) {
+  //     let valid = true;
+  //     let record = {};
+  //     Object.keys(this.schema).forEach(field => {
+  //       if (this.schema[field].required) {
+  //         if (entry[field]) {
+  //           if (!this.schema[field].type || (this.schema[field].type === typeof entry[field])) {
+  //             record[field] = entry[field];
+  //           }
+  //           else {
+  //             valid = false
+  //           }
+  //         } else {
+  //           valid = false;
+  //         }
+  //       }
+  //       else {
+  //         if (this.schema[field].type === typeof entry[field]) {
+  //           record[field] = entry[field];
+  //         }
+  //       }
+  //     });
+  //     return valid ? record : undefined;
+  //   }
+  // }

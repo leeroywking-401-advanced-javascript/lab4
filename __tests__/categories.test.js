@@ -28,31 +28,33 @@ describe('Categories Model', () => {
           expect(record[key]).toEqual(obj[key]);
         });
       })
-      .catch(e => console.error('ERR', e));
+      .catch(e => console.error);
   });
 
   it('can get() a category', () => {
     let obj = { name: 'Test Category' };
-    return categories.create(obj)
+    categories.create(obj)
       .then(record => {
-        return categories.get(record._id)
+        categories.get(record._id)
           .then(category => {
             Object.keys(obj).forEach(key => {
               expect(category[0][key]).toEqual(obj[key]);
             });
           });
-      });
+      })
+      .catch(err => console.error);
   });
 
   it('can delete() a category', () => {
     let obj = { name: 'Test Category' };
-    return categories.create(obj)
+    categories.create(obj)
       .then(record => {
         return categories.delete(record._id)
           .then(category => {
             expect(categories.get(record._id).name).toBeFalsy();
           });
-      });
+      })
+      .catch(err => console.error);
   });
 
   it('can update a category', () => {
@@ -64,10 +66,10 @@ describe('Categories Model', () => {
             categories.get(55)
               .then(zz => {
                 expect(zz.name).toEqual('New Test Category');
-              })
-              .catch(err => console.err);
+              }).catch(err => console.error)
           });
-      });
+      })
+      .catch(err => console.error);
   });
 
   it('rejects bad type checks', () => {

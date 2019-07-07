@@ -35,32 +35,19 @@ class Model {
   }
 
   sanitize(entry) {
-
     let valid = true;
-    let record = {};
-
+    let record = entry;
     Object.keys(this.schema).forEach(field => {
-      if (this.schema[field].required) {
-        if (entry[field]) {
-          if (!this.schema[field].type || (this.schema[field].type === typeof entry[field])) {
-            record[field] = entry[field];
-          }
-          else {
-            valid = false
-          }
-        } else {
-          valid = false;
-        }
+      if (this.schema[field].required && !record[field]) {
+        valid = false;
       }
-      else {
-        if (this.schema[field].type === typeof entry[field]) {
-          record[field] = entry[field];
-        }
+      if (record[field] && this.schema[field].type && !(typeof record[field] === this.schema[field].type)) {
+        valid = false;
       }
-    });
+    })
+    console.log(record.id)
     return valid ? record : undefined;
   }
-
 }
 
 module.exports = Model;
