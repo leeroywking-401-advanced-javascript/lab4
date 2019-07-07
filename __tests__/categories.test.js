@@ -66,7 +66,8 @@ describe('Categories Model', () => {
             categories.get(55)
               .then(zz => {
                 expect(zz.name).toEqual('New Test Category');
-              }).catch(err => console.error)
+              })
+              .catch(err => console.error);
           });
       })
       .catch(err => console.error);
