@@ -48,7 +48,6 @@ class Model {
         record[field] = entry[field];
       }
     });
-
     return valid ? record : undefined;
   }
 
