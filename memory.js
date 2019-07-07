@@ -45,7 +45,6 @@ class Model {
         valid = false;
       }
     })
-    console.log(record.id)
     return valid ? record : undefined;
   }
 }
